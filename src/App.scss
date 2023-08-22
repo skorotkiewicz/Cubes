@@ -5,6 +5,10 @@
   // text-align: center;
 }
 
+details {
+  cursor: pointer;
+}
+
 .rainbow a {
   background: linear-gradient(
     90deg,
