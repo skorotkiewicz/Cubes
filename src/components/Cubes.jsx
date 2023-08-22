@@ -25,7 +25,7 @@ const Cubes = () => {
   return (
     <div>
       <div className={`cube${grid ? " grid" : " nogrid"}`}>
-        {new Array(255).fill().map((_, i) => (
+        {new Array(289).fill().map((_, i) => (
           <div
             key={i}
             className="h"
