@@ -52,18 +52,16 @@ details {
 }
 
 .grid > div {
-  border: 1px solid #909090;
+  border: 1px solid #444444;
 }
 .nogrid > div {
   border: 1px solid transparent;
 }
 
 .cube {
-  width: 345px;
+  width: 460px; // width: 345px;
   margin-top: 20px;
-  // width: 342px;
   // border: 1px solid #6d6d6d;
-
   // background-color: #555555;
 
   .selected {
@@ -71,9 +69,9 @@ details {
   }
 
   .h {
-    width: 30px;
-    height: 30px;
-    margin: 2px;
+    width: 25px;
+    height: 25px;
+    margin: 1px;
     text-align: center;
     display: inline-block;
 
