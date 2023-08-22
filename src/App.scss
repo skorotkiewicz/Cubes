@@ -5,8 +5,16 @@
   // text-align: center;
 }
 
+.btn {
+  button {
+    margin: 5px;
+    padding: 4px;
+  }
+}
+
 .tools {
   width: 250px;
+  margin-top: 30px;
 
   .color {
     width: 20px;
@@ -17,8 +25,14 @@
   }
 }
 
+.grid > div {
+  border: 1px solid #909090;
+}
+
 .cube {
-  width: 350px;
+  width: 345px;
+  // width: 342px;
+  // border: 1px solid #6d6d6d;
 
   .selected {
     background-color: #6d6d6d;
@@ -27,7 +41,6 @@
   .h {
     width: 30px;
     height: 30px;
-    border: 1px solid #909090;
     margin: 2px;
     text-align: center;
     display: inline-block;

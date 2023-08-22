@@ -5,6 +5,7 @@ import { useStore } from "react-atomize-store";
 import Home from "./components/Home";
 import About from "./components/About";
 import Dashboard from "./components/Dashboard";
+import Cubes from "./components/Cubes";
 import NoMatch from "./components/NoMatch";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="cubes" element={<Cubes />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
@@ -46,11 +48,14 @@ function Layout() {
           <li className={current("/")}>
             <Link to="/">Home</Link>
           </li>
-          <li className={current("/about")}>
-            <Link to="/about">About</Link>
+          <li className={current("/cubes")}>
+            <Link to="/cubes">Cubes</Link>
           </li>
           <li className={current("/dashboard")}>
             <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li className={current("/about")}>
+            <Link to="/about">About</Link>
           </li>
           <li>
             <Link to="/nothing-here">Nothing Here</Link>
