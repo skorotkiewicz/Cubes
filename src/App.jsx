@@ -48,7 +48,7 @@ function Layout() {
           <li className={current("/")}>
             <Link to="/">Home</Link>
           </li>
-          <li className={`${current("/cubes")} rainbow`}>
+          <li className={`${current("/cubes") ?? ""} rainbow`}>
             <Link to="/cubes">Cubes</Link>
           </li>
           <li className={current("/dashboard")}>
