@@ -37,7 +37,7 @@ const Cubes = () => {
         ))}
       </div>
 
-      <Tools setCurrentColor={setCurrentColor} />
+      <Tools currentColor={currentColor} setCurrentColor={setCurrentColor} />
 
       <div className="btn">
         <button onClick={() => setGrid((prev) => !prev)}>

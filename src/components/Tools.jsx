@@ -1,4 +1,4 @@
-const Tools = ({ setCurrentColor }) => {
+const Tools = ({ currentColor, setCurrentColor }) => {
   const colors = [
     "#ff4500",
     "#ffa800",
@@ -24,7 +24,7 @@ const Tools = ({ setCurrentColor }) => {
         <div
           key={key}
           style={{ backgroundColor: c }}
-          className="color"
+          className={`color ${currentColor === c ? "select" : ""}`}
           onClick={() => setCurrentColor(c)}
         >
           &nbsp;
