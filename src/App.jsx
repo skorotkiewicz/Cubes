@@ -45,7 +45,6 @@ function Layout() {
           <li className={current("/")}>
             <Link to="/">Home</Link>
           </li>
-
           <li className={current("/about")}>
             <Link to="/about">About</Link>
           </li>
