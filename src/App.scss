@@ -5,8 +5,20 @@
   // text-align: center;
 }
 
+.tools {
+  width: 250px;
+
+  .color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+  }
+}
+
 .cube {
-  width: 400px;
+  width: 350px;
 
   .selected {
     background-color: #6d6d6d;
@@ -16,8 +28,7 @@
     width: 30px;
     height: 30px;
     border: 1px solid #909090;
-    margin: 5px;
-    padding: 5px;
+    margin: 2px;
     text-align: center;
     display: inline-block;
 
