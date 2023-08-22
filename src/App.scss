@@ -62,16 +62,12 @@ details {
   width: 460px; // width: 345px;
   margin-top: 20px;
   background-color: #333333;
+  user-select: none;
 
-  .selected {
-    background-color: #6d6d6d;
-  }
-
-  .h {
+  div {
     width: 25px;
     height: 25px;
     margin: 1px;
-    text-align: center;
     display: inline-block;
 
     &:hover {

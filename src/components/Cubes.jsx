@@ -28,7 +28,6 @@ const Cubes = () => {
         {new Array(289).fill().map((_, i) => (
           <div
             key={i}
-            className="h"
             style={{ backgroundColor: cubes && cubes[i] }}
             onClick={() => selectCube(i)}
           >
