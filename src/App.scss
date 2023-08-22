@@ -5,6 +5,30 @@
   // text-align: center;
 }
 
+.cube {
+  width: 400px;
+
+  .selected {
+    background-color: #6d6d6d;
+  }
+
+  .h {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #909090;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+
+    &:hover {
+      border: 1px solid #d8d8d8;
+      background-color: #6d6d6d;
+      cursor: pointer;
+    }
+  }
+}
+
 nav {
   .current a {
     border-bottom: 4px solid #616161;

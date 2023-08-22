@@ -12,9 +12,10 @@ export default function App() {
     {
       text: "",
       select: 0,
+      cubes: [],
     },
     true,
-    ["select"]
+    ["select", "cubes"]
   );
 
   return (
