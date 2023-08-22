@@ -40,7 +40,9 @@ const Cubes = () => {
       <Tools setCurrentColor={setCurrentColor} />
 
       <div className="btn">
-        <button onClick={() => setGrid((prev) => !prev)}>Grid</button>
+        <button onClick={() => setGrid((prev) => !prev)}>
+          {grid ? "Off Grid" : "On Grid"}
+        </button>
         <button
           onClick={() => {
             if (confirm("Clear cubes?")) {
