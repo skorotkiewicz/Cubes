@@ -1,3 +1,8 @@
+@use "styles/nav.scss";
+@use "styles/cube.scss";
+@use "styles/tools.scss";
+@use "styles/rainbow.scss";
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -7,104 +12,4 @@
 
 details {
   cursor: pointer;
-}
-
-.rainbow a {
-  background: linear-gradient(
-    45deg,
-    rgba(255, 0, 0, 0.3) 0%,
-    rgba(255, 154, 0, 0.3) 10%,
-    rgba(208, 222, 33, 0.3) 20%,
-    rgba(79, 220, 74, 0.3) 30%,
-    rgba(63, 218, 216, 0.3) 40%,
-    rgba(47, 201, 226, 0.3) 50%,
-    rgba(28, 127, 238, 0.3) 60%,
-    rgba(95, 21, 242, 0.3) 70%,
-    rgba(186, 12, 248, 0.3) 80%,
-    rgba(251, 7, 217, 0.3) 90%,
-    rgba(255, 0, 0, 0.3) 100%
-  );
-}
-
-.btn {
-  button {
-    margin: 5px;
-    padding: 4px;
-    cursor: pointer;
-  }
-}
-
-.tools {
-  width: 250px;
-  margin-top: 30px;
-
-  .color {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    margin: 5px;
-    cursor: pointer;
-  }
-
-  .select {
-    border-radius: 0.4rem;
-  }
-}
-
-.grid > div {
-  border: 1px solid #444444;
-}
-.nogrid > div {
-  border: 1px solid transparent;
-}
-
-.cube {
-  width: 460px; // width: 345px;
-  margin-top: 20px;
-  background-color: #333333;
-  user-select: none;
-
-  div {
-    width: 25px;
-    height: 25px;
-    margin: 1px;
-    display: inline-block;
-
-    &:hover {
-      border: 1px solid #d8d8d8;
-      background-color: #6d6d6d;
-      cursor: pointer;
-    }
-  }
-}
-
-nav {
-  .current a {
-    border-bottom: 4px solid #616161;
-  }
-
-  ul li {
-    display: inline-block;
-    padding: 1rem;
-
-    a {
-      padding: 5px;
-      border: 1px solid #616161;
-      border-radius: 5px;
-      color: #a2a2a2;
-      text-decoration: none;
-
-      &:hover {
-        border: 1px solid #909090;
-        background-color: #2f2f2f;
-        // text-decoration: underline;
-      }
-    }
-  }
-}
-
-.select {
-  label {
-    padding-right: 0.5rem;
-  }
 }

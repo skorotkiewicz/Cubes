@@ -1,0 +1,34 @@
+.grid > div {
+  border: 1px solid #444444;
+}
+.nogrid > div {
+  border: 1px solid transparent;
+}
+
+.cube {
+  width: 460px; // width: 345px;
+  margin-top: 20px;
+  background-color: #333333;
+  user-select: none;
+
+  div {
+    width: 25px;
+    height: 25px;
+    margin: 1px;
+    display: inline-block;
+
+    &:hover {
+      border: 1px solid #d8d8d8;
+      background-color: #6d6d6d;
+      cursor: pointer;
+    }
+  }
+}
+
+.btn {
+  button {
+    margin: 5px;
+    padding: 4px;
+    cursor: pointer;
+  }
+}

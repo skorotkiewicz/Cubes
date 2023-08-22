@@ -56,15 +56,16 @@ const Cubes = () => {
       <details>
         <summary>Import / Export</summary>
         <strong>It&apos;s auto save.</strong>
-
-        <textarea
-          defaultValue={JSON.stringify(cubes)}
-          cols="60"
-          rows="15"
-          onChange={(e) =>
-            e.target.value && setCubes(JSON.parse(e.target.value))
-          }
-        ></textarea>
+        <div>
+          <textarea
+            defaultValue={JSON.stringify(cubes)}
+            cols="60"
+            rows="15"
+            onChange={(e) =>
+              e.target.value && setCubes(JSON.parse(e.target.value))
+            }
+          ></textarea>
+        </div>
       </details>
     </div>
   );

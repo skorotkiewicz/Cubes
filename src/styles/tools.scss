@@ -1,0 +1,22 @@
+.tools {
+  width: 250px;
+  margin-top: 30px;
+
+  .color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .select {
+    border-radius: 0.4rem;
+  }
+}
+
+.select {
+  label {
+    padding-right: 0.5rem;
+  }
+}
