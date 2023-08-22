@@ -31,6 +31,18 @@ const Cubes = () => {
 
   return (
     <div>
+      <div className="boardsize">
+        <span>Board size: {size}</span>
+        <input
+          type="range"
+          defaultValue={17}
+          min="5"
+          max="40"
+          onChange={(e) => setSize(e.target.value)}
+        />
+        <button onClick={() => setSize(17)}>Default</button>
+      </div>
+
       <div
         className={`cube${grid ? " grid" : " nogrid"}`}
         style={{
@@ -63,18 +75,6 @@ const Cubes = () => {
         >
           Clear
         </button>
-      </div>
-
-      <div className="boardsize">
-        <span>Board size: {size}</span>
-        <input
-          type="range"
-          defaultValue={17}
-          min="5"
-          max="40"
-          onChange={(e) => setSize(e.target.value)}
-        />
-        <button onClick={() => setSize(17)}>Default</button>
       </div>
 
       <details>
