@@ -1,6 +1,5 @@
 import "./App.scss";
-
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route, Outlet, Link, useLocation } from "react-router-dom";
 import { useStore } from "react-atomize-store";
 
 import Home from "./components/Home";
@@ -12,9 +11,10 @@ export default function App() {
   useStore(
     {
       text: "",
+      select: 0,
     },
     true,
-    []
+    ["select"]
   );
 
   return (
@@ -30,17 +30,26 @@ export default function App() {
 }
 
 function Layout() {
+  const location = useLocation();
+
+  const current = (url) => {
+    if (location.pathname === url) {
+      return "current";
+    }
+  };
+
   return (
     <div>
       <nav>
         <ul>
-          <li>
+          <li className={current("/")}>
             <Link to="/">Home</Link>
           </li>
-          <li>
+
+          <li className={current("/about")}>
             <Link to="/about">About</Link>
           </li>
-          <li>
+          <li className={current("/dashboard")}>
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
