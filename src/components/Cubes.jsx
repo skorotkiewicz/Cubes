@@ -24,7 +24,7 @@ const Cubes = () => {
 
   return (
     <div>
-      <div className={`cube${grid ? " grid" : ""}`}>
+      <div className={`cube${grid ? " grid" : " nogrid"}`}>
         {new Array(100).fill().map((_, i) => (
           <div
             key={i}

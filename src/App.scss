@@ -46,6 +46,9 @@
 .grid > div {
   border: 1px solid #909090;
 }
+.nogrid > div {
+  border: 1px solid transparent;
+}
 
 .cube {
   width: 345px;
