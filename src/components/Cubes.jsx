@@ -6,6 +6,7 @@ const Cubes = () => {
   const [cubes, setCubes] = useAtom("cubes");
   const [currentColor, setCurrentColor] = useState("#ffffff");
   const [grid, setGrid] = useState(true);
+  const [size, setSize] = useState(17);
 
   const selectCube = (id) => {
     if (cubes && cubes[id]) {
@@ -22,10 +23,21 @@ const Cubes = () => {
     }
   };
 
+  const cubeSize = 25;
+  const margin = 1;
+
+  const rows = size;
+  const cols = size;
+
   return (
     <div>
-      <div className={`cube${grid ? " grid" : " nogrid"}`}>
-        {new Array(289).fill().map((_, i) => (
+      <div
+        className={`cube${grid ? " grid" : " nogrid"}`}
+        style={{
+          width: `${cols * (cubeSize + margin * 2)}px`,
+        }}
+      >
+        {new Array(rows * cols).fill().map((_, i) => (
           <div
             key={i}
             style={{ backgroundColor: cubes && cubes[i] }}
@@ -51,6 +63,18 @@ const Cubes = () => {
         >
           Clear
         </button>
+      </div>
+
+      <div className="boardsize">
+        <span>Board size: {size}</span>
+        <input
+          type="range"
+          defaultValue={17}
+          min="5"
+          max="40"
+          onChange={(e) => setSize(e.target.value)}
+        />
+        <button onClick={() => setSize(17)}>Default</button>
       </div>
 
       <details>
