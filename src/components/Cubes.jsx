@@ -35,7 +35,7 @@ const Cubes = () => {
         <span>Board size: {size}</span>
         <input
           type="range"
-          defaultValue={17}
+          value={size}
           min="5"
           max="40"
           onChange={(e) => setSize(e.target.value)}
