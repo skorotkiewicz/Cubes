@@ -41,7 +41,9 @@ const MultiCubes = () => {
   };
 
   useEffect(() => {
-    const socket = io("ws://172.20.10.11:8080");
+    const socket = io("ws://172.20.10.11:8080", {
+      path: "/api",
+    });
 
     socket.on("connect", () => {
       sendMessage("player", { id: socket.id });
