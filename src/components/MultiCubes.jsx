@@ -42,10 +42,11 @@ const MultiCubes = () => {
 
   useEffect(() => {
     const socket = io(
-      import.meta.env.DEV ? "ws://172.20.10.11:8080" : import.meta.env.API_URL,
+      import.meta.env.DEV
+        ? "ws://172.20.10.11:8080"
+        : import.meta.env.VERCEL_URL,
       {
         path: "/api/",
-        // transports: ["polling", "websocket"],
       }
     );
 
