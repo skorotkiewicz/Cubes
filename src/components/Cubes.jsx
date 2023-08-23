@@ -4,7 +4,7 @@ import Tools from "./Tools";
 
 const Cubes = () => {
   const [cubes, setCubes] = useAtom("cubes");
-  const [currentColor, setCurrentColor] = useState("#ffffff");
+  const [currentColor, setCurrentColor] = useState(null);
   const [grid, setGrid] = useState(true);
   const [size, setSize] = useState(17);
 
@@ -53,7 +53,11 @@ const Cubes = () => {
           <div
             key={i}
             style={{ backgroundColor: cubes && cubes[i] }}
-            onClick={() => selectCube(i)}
+            onClick={() => {
+              if (currentColor) {
+                selectCube(i);
+              }
+            }}
           >
             &nbsp;
           </div>

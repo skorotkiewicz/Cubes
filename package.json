@@ -14,7 +14,8 @@
     "react-atomize-store": "^1.0.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0",
-    "sass": "^1.56.1"
+    "sass": "^1.56.1",
+    "socket.io-client": "^4.6.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

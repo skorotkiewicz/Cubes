@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Dashboard from "./components/Dashboard";
 import Cubes from "./components/Cubes";
+import MultiCubes from "./components/MultiCubes";
 import NoMatch from "./components/NoMatch";
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="cubes" element={<Cubes />} />
+        <Route path="multicubes" element={<MultiCubes />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
@@ -51,14 +53,14 @@ function Layout() {
           <li className={`${current("/cubes") ?? ""} rainbow`}>
             <Link to="/cubes">Cubes</Link>
           </li>
+          <li className={`${current("/multicubes") ?? ""} rainbow`}>
+            <Link to="/multicubes">MultiCubes</Link>
+          </li>
           <li className={current("/dashboard")}>
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className={current("/about")}>
             <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/nothing-here">Nothing Here</Link>
           </li>
         </ul>
       </nav>
