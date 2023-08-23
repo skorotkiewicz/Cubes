@@ -4,15 +4,11 @@ import { Server } from "socket.io";
 const server = createServer();
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://172.20.10.11:5173",
-      "http://127.0.0.1:5173",
-      // process.env.VERCEL_URL,
-    ],
+    origin: ["http://172.20.10.11:5173", "http://127.0.0.1:5173"],
     // allowedHeaders: ["my-custom-header"],
     // credentials: true
   },
-  path: "/api",
+  path: "/api/",
 });
 
 // socket.emit(); // to sender
