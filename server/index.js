@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   socket.on("player", (data) => {
     const initBoard = {};
     const name = username();
-    const initMessages = Array.from(messages.values()).slice(-20);
+    const initMessages = Array.from(messages.values()).slice(-30);
 
     players.set(data.id, { id: data.id, name });
 
