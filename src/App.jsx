@@ -15,6 +15,8 @@ export default function App() {
       text: "",
       select: 0,
       cubes: [],
+      username: "",
+      messages: [],
     },
     true,
     ["select", "cubes"]

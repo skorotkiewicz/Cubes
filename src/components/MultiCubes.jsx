@@ -1,12 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
+import { useAtom } from "react-atomize-store";
 import Tools from "./Tools";
+import Chat from "./Chat";
 
 const MultiCubes = () => {
   const [cubes, setCubes] = useState([]);
   const [currentColor, setCurrentColor] = useState(null);
   const [grid, setGrid] = useState(true);
   const [countUsers, setCountUsers] = useState(0);
+  const [, setUserName] = useAtom("username");
+  const [, setMessages] = useAtom("messages");
+
   const ws = useRef(null);
 
   const selectCube = (id, recv, type) => {
@@ -56,16 +61,22 @@ const MultiCubes = () => {
     });
 
     socket.onAny((...data) => {
-      if (data[0] === "_initboard") {
-        setCubes(data[1]);
-      }
-
       if (data[0] === "_cube") {
         selectCube(null, { id: data[1].id, color: data[1].color }, 1);
       }
 
       if (data[0] === "_count") {
         setCountUsers(data[1]);
+      }
+
+      if (data[0] === "_init") {
+        setMessages(data[1]);
+        setUserName(data[2]);
+        setCubes(data[3]);
+      }
+
+      if (data[0] === "_message") {
+        setMessages((prev) => [...prev, data[1]]);
       }
     });
 
@@ -109,6 +120,8 @@ const MultiCubes = () => {
         </button>
         <span>Users: {countUsers}</span>
       </div>
+
+      <Chat ws={ws.current} />
     </div>
   );
 };

@@ -1,5 +1,17 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  // colors,
+  animals,
+} from "unique-names-generator";
+
+const username = () => {
+  return uniqueNamesGenerator({
+    dictionaries: [adjectives, animals],
+  });
+};
 
 const server = createServer();
 const io = new Server(server, {
@@ -18,19 +30,23 @@ const io = new Server(server, {
 
 const players = new Map();
 const board = new Map();
+const messages = new Map();
 
 io.on("connection", (socket) => {
   // console.log(socket.id);
 
   socket.on("player", (data) => {
-    const json = {};
-    players.set(data.id, { id: data.id });
+    const initBoard = {};
+    const name = username();
+    const initMessages = Array.from(messages.values()).slice(-20);
+
+    players.set(data.id, { id: data.id, name });
 
     for (const [key, value] of board) {
-      json[key] = value;
+      initBoard[key] = value;
     }
 
-    socket.emit("_initboard", json);
+    socket.emit("_init", initMessages, name, initBoard);
     io.emit("_count", players.size);
   });
 
@@ -40,6 +56,19 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("_cube", {
       id: data.id,
       color: data.color,
+    });
+  });
+
+  socket.on("message", (data) => {
+    const name = players.get(socket.id)?.name;
+    const date = new Date();
+
+    messages.set(name + date, { date, name, message: data });
+
+    socket.broadcast.emit("_message", {
+      date,
+      name,
+      message: data,
     });
   });
 
