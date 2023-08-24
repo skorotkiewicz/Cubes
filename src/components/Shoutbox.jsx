@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import { useAtom } from "react-atomize-store";
 
 const Shoutbox = ({ ws }) => {
   const [open, setOpen] = useState(false);
+  const [unread, setUnread] = useState(0);
   const [msg, setMsg] = useState("");
   const [userName] = useAtom("username");
   const [messages, setMessages] = useAtom("messages");
@@ -13,6 +15,8 @@ const Shoutbox = ({ ws }) => {
     if (container) {
       container.scrollTop = container.scrollHeight;
     }
+
+    if (!open) setUnread((prev) => prev + 1);
   }, [messages]);
 
   const sendMessage = (data) => {
@@ -38,8 +42,14 @@ const Shoutbox = ({ ws }) => {
   return (
     <div className="chat">
       {!open && (
-        <button className="open" onClick={() => setOpen(true)}>
-          Shoutbox
+        <button
+          className="open"
+          onClick={() => {
+            setOpen(true);
+            setUnread(0);
+          }}
+        >
+          Shoutbox {unread > 0 && <span>{unread}</span>}
         </button>
       )}
 
