@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAtom } from "react-atomize-store";
 
-const Chat = ({ ws }) => {
+const Shoutbox = ({ ws }) => {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
   const [userName] = useAtom("username");
@@ -39,7 +39,7 @@ const Chat = ({ ws }) => {
     <div className="chat">
       {!open && (
         <button className="open" onClick={() => setOpen(true)}>
-          Chat
+          Shoutbox
         </button>
       )}
 
@@ -47,7 +47,7 @@ const Chat = ({ ws }) => {
         <div className="chat-popup">
           <div className="container">
             <h3>
-              Chat
+              Shoutbox
               <button className="close" onClick={() => setOpen(false)}>
                 X
               </button>
@@ -83,4 +83,4 @@ const Chat = ({ ws }) => {
   );
 };
 
-export default Chat;
+export default Shoutbox;

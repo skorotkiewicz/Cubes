@@ -1,28 +1,12 @@
-import { useAtom } from "react-atomize-store";
-
 const Home = () => {
-  const [text] = useAtom("text");
-  const [select, setSelect] = useAtom("select");
-
-  const data = [{ m: 1 }, { m: 2 }, { m: 3 }, { m: 4 }];
-
   return (
-    <div>
-      <h2>Home {text && `[${text}]`}</h2>
-
-      {data.map((value, key) => (
-        <div className="select" key={key}>
-          <label htmlFor={value.m}>{value.m}</label>
-          <input
-            type="radio"
-            name="select"
-            id={value.m}
-            value={value.m}
-            checked={select === value.m}
-            onChange={(e) => setSelect(Number(e.target.value))}
-          />
-        </div>
-      ))}
+    <div className="home">
+      <h1>Hello!</h1>
+      <div>
+        This is a simple but very interesting Cubes game, that is, you can draw
+        with pixels, you can draw offline or play together with friends while
+        you can also chat with your friends while drawing.
+      </div>
     </div>
   );
 };

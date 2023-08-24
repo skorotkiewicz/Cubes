@@ -2,7 +2,7 @@
 @use "styles/cube.scss";
 @use "styles/tools.scss";
 @use "styles/rainbow.scss";
-@use "styles/chat.scss";
+@use "styles/shoutbox.scss";
 
 #root {
   max-width: 1280px;
@@ -10,6 +10,16 @@
   padding: 2rem;
 }
 
+* {
+  font-family: DejaVu Sans Mono, monospace;
+  hyphens: auto;
+}
+
 details summary {
   cursor: pointer;
+}
+
+.home {
+  max-width: 600px;
+  margin: 30px;
 }

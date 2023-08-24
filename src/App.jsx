@@ -4,7 +4,6 @@ import { useStore } from "react-atomize-store";
 
 import Home from "./components/Home";
 import About from "./components/About";
-import Dashboard from "./components/Dashboard";
 import Cubes from "./components/Cubes";
 import MultiCubes from "./components/MultiCubes";
 import NoMatch from "./components/NoMatch";
@@ -12,14 +11,12 @@ import NoMatch from "./components/NoMatch";
 export default function App() {
   useStore(
     {
-      text: "",
-      select: 0,
       cubes: [],
       username: "",
       messages: [],
     },
     true,
-    ["select", "cubes"]
+    ["cubes"]
   );
 
   return (
@@ -27,7 +24,6 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="dashboard" element={<Dashboard />} />
         <Route path="cubes" element={<Cubes />} />
         <Route path="multicubes" element={<MultiCubes />} />
         <Route path="*" element={<NoMatch />} />
@@ -57,9 +53,6 @@ function Layout() {
           </li>
           <li className={`${current("/multicubes") ?? ""} rainbow`}>
             <Link to="/multicubes">MultiCubes</Link>
-          </li>
-          <li className={current("/dashboard")}>
-            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className={current("/about")}>
             <Link to="/about">About</Link>

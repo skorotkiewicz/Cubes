@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { useAtom } from "react-atomize-store";
 import Tools from "./Tools";
-import Chat from "./Chat";
+import Shoutbox from "./Shoutbox";
 
 const MultiCubes = () => {
   const [cubes, setCubes] = useState([]);
@@ -121,7 +121,7 @@ const MultiCubes = () => {
         <span>Users: {countUsers}</span>
       </div>
 
-      <Chat ws={ws.current} />
+      <Shoutbox ws={ws.current} />
     </div>
   );
 };
