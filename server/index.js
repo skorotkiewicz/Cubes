@@ -31,6 +31,7 @@ io.on("connection", (socket) => {
     }
 
     socket.emit("_initboard", json);
+    io.emit("_count", players.size);
   });
 
   socket.on("cube", (data) => {
@@ -44,6 +45,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     players.delete(socket.id);
+    io.emit("_count", players.size);
   });
 });
 

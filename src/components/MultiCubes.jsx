@@ -6,6 +6,7 @@ const MultiCubes = () => {
   const [cubes, setCubes] = useState([]);
   const [currentColor, setCurrentColor] = useState(null);
   const [grid, setGrid] = useState(true);
+  const [countUsers, setCountUsers] = useState(0);
   const ws = useRef(null);
 
   const selectCube = (id, recv, type) => {
@@ -62,6 +63,10 @@ const MultiCubes = () => {
       if (data[0] === "_cube") {
         selectCube(null, { id: data[1].id, color: data[1].color }, 1);
       }
+
+      if (data[0] === "_count") {
+        setCountUsers(data[1]);
+      }
     });
 
     ws.current = socket;
@@ -102,6 +107,7 @@ const MultiCubes = () => {
         <button onClick={() => setGrid((prev) => !prev)}>
           {grid ? "Off Grid" : "On Grid"}
         </button>
+        <span>Users: {countUsers}</span>
       </div>
     </div>
   );
