@@ -60,6 +60,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (data) => {
+    if (!(data.length >= 1) || data.length > 255) return;
+
     const name = players.get(socket.id)?.name;
     const date = new Date();
 

@@ -67,6 +67,7 @@ const Shoutbox = ({ ws }) => {
               <input
                 type="text"
                 value={msg}
+                maxLength={255}
                 onChange={(e) => setMsg(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
