@@ -115,7 +115,7 @@ async function createServer() {
         render = (await import("./dist/server/entry-server.js")).render;
       }
 
-      const appHtml = await render(url);
+      const appHtml = await render({ path: url });
       const html = template.replace("<!--ssr-outlet-->", appHtml);
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
