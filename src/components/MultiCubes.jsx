@@ -51,6 +51,7 @@ const MultiCubes = () => {
       import.meta.env.DEV ? "ws://172.20.10.11:5173" : "wss://cubes.fly.dev",
       {
         path: "/api/",
+        transports: ["websocket"],
       }
     );
 
