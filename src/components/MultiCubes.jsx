@@ -11,6 +11,7 @@ const MultiCubes = () => {
   const [countUsers, setCountUsers] = useState(0);
   const [, setUserName] = useAtom("username");
   const [, setMessages] = useAtom("messages");
+  const [connectStatus, setConnectStatus] = useState(false);
 
   const ws = useRef(null);
 
@@ -56,6 +57,7 @@ const MultiCubes = () => {
     );
 
     socket.on("connect", () => {
+      setConnectStatus(socket.connected);
       sendMessage("player", { id: socket.id });
     });
 
@@ -117,10 +119,13 @@ const MultiCubes = () => {
         <button onClick={() => setGrid((prev) => !prev)}>
           {grid ? "Off Grid" : "On Grid"}
         </button>
-        <span>Users: {countUsers}</span>
+        {connectStatus ? (
+          <span>Users: {countUsers}</span>
+        ) : (
+          <span>Connecting...</span>
+        )}
       </div>
-
-      <Shoutbox ws={ws.current} />
+      {connectStatus && <Shoutbox ws={ws.current} />}
     </div>
   );
 };
