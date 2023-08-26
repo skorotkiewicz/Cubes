@@ -30,8 +30,7 @@ async function createServer() {
 
   const io = new Server(server, {
     cors: {
-      //   origin: ["http://172.20.10.11:5173", "http://127.0.0.1:5173"],
-      origin: "*",
+      origin: ["http://172.20.10.11:5173", "https://cubes.fly.dev"],
     },
     path: "/api/",
   });
