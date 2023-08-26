@@ -107,19 +107,27 @@ const MultiCubes = () => {
           width: `${cols * (cubeSize + margin * 2)}px`,
         }}
       >
-        {new Array(rows * cols).fill().map((_, i) => (
-          <div
-            key={i}
-            style={{ backgroundColor: cubes && cubes[i] }}
-            onClick={() => {
-              if (currentColor) {
-                selectCube(i);
-              }
-            }}
-          >
-            &nbsp;
+        {!connectStatus ? (
+          <div>
+            <h1>Loading...</h1>
           </div>
-        ))}
+        ) : (
+          <>
+            {new Array(rows * cols).fill().map((_, i) => (
+              <div
+                key={i}
+                style={{ backgroundColor: cubes && cubes[i] }}
+                onClick={() => {
+                  if (currentColor) {
+                    selectCube(i);
+                  }
+                }}
+              >
+                &nbsp;
+              </div>
+            ))}
+          </>
+        )}
       </div>
 
       <Tools currentColor={currentColor} setCurrentColor={setCurrentColor} />
