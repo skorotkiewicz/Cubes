@@ -40,7 +40,7 @@ async function createServer() {
   });
 
   const players = new Map();
-  const board = new Map(SUPABASE() ? await initBoardDB() : null);
+  const board = SUPABASE() ? await initBoardDB() : new Map();
   const messages = new Map();
   let countSave = 0;
 

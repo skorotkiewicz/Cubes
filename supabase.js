@@ -12,7 +12,8 @@ const supabase = createClient(
 export const initBoardDB = async () => {
   const { data } = await supabase.from("board").select();
 
-  return data.map((record) => [record.id, record.color]);
+  const records = data.map((record) => [record.id, record.color]);
+  return new Map(records);
 };
 
 // save to db
