@@ -48,7 +48,7 @@ const MultiCubes = () => {
 
   useEffect(() => {
     const socket = io(
-      import.meta.env.DEV ? "ws://127.0.0.1:5173" : import.meta.env.API_URL,
+      import.meta.env.DEV ? "ws://127.0.0.1:5173" : "wss://cubes.fly.dev",
       {
         path: "/api/",
       }
