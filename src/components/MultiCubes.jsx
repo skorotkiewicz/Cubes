@@ -133,7 +133,7 @@ const MultiCubes = () => {
         ) : (
           <span>Connecting...</span>
         )}
-        {supa && <span>saving...</span>}
+        {supa && <span>Supa...</span>}
       </div>
       {connectStatus && <Shoutbox ws={ws.current} />}
     </div>

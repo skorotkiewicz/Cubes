@@ -42,7 +42,6 @@ async function createServer() {
   const players = new Map();
   const board = SUPABASE() ? await initBoardDB() : new Map();
   const messages = new Map();
-  let countSave = 0;
 
   io.on("connection", (socket) => {
     socket.on("player", (data) => {
@@ -60,22 +59,13 @@ async function createServer() {
       io.emit("_count", players.size);
     });
 
-    socket.on("cube", async (data) => {
+    socket.on("cube", (data) => {
       board.set(data.id, data.color);
 
       socket.broadcast.emit("_cube", {
         id: data.id,
         color: data.color,
       });
-
-      if (board.size > 0 && SUPABASE()) {
-        countSave++;
-        if (countSave > 10) {
-          countSave = 0;
-          await saveSupabaseDB(board);
-          io.emit("_supa", "base");
-        }
-      }
     });
 
     socket.on("message", (data) => {
@@ -93,7 +83,10 @@ async function createServer() {
       });
     });
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", async () => {
+      await saveSupabaseDB(board);
+      io.emit("_supa", "base");
+
       players.delete(socket.id);
       io.emit("_count", players.size);
     });
