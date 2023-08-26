@@ -1,3 +1,11 @@
+# fly.toml app configuration file generated for cubes on 2023-08-26T03:42:53+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "cubes"
+primary_region = "arn"
+
 # fly.toml app configuration file generated for cubes on 2023-08-26T01:52:23+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
@@ -6,36 +14,22 @@
 app = "cubes"
 primary_region = "arn"
 
-kill_signal = "SIGINT"
-kill_timeout = 5
-
-[env]
-
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
-
 [[services]]
-  http_checks = []
   internal_port = 5173
   protocol = "tcp"
-  script_checks = []
 
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
-    type = "connections"
 
   [[services.ports]]
     handlers = ["http"]
-    port = 80
+    port = "80"
 
   [[services.ports]]
     handlers = ["tls", "http"]
-    port = 443
+    port = "443"
 
   [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 6
-    timeout = "2s"
+    interval = 10000
+    timeout = 2000
