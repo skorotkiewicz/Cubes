@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import "dotenv/config";
 import { createServer as createHttpServer } from "http";
 import { createServer as createViteServer } from "vite";
 import fs from "fs";
@@ -12,6 +13,7 @@ import {
   // colors,
   animals,
 } from "unique-names-generator";
+import { initBoardDB, saveSupabaseDB } from "./supabase.js";
 
 const username = () => {
   return uniqueNamesGenerator({
@@ -26,6 +28,8 @@ async function createServer() {
   const app = express();
   const server = createHttpServer(app);
   const resolve = (p) => path.resolve(__dirname, p);
+  const SUPABASE = () => process.env.ENABLE_SUPABASE === "true";
+
   let vite;
 
   const io = new Server(server, {
@@ -36,11 +40,12 @@ async function createServer() {
   });
 
   const players = new Map();
-  const board = new Map();
+  const board = new Map(SUPABASE() ? await initBoardDB() : null);
   const messages = new Map();
+  let countSave = 0;
 
   io.on("connection", (socket) => {
-    socket.on("player", (data) => {
+    socket.on("player", async (data) => {
       const initBoard = {};
       const name = username();
       const initMessages = Array.from(messages.values()).slice(-30);
@@ -53,6 +58,15 @@ async function createServer() {
 
       socket.emit("_init", initMessages, name, initBoard);
       io.emit("_count", players.size);
+
+      if (board.size > 0 && SUPABASE()) {
+        countSave++;
+        if (countSave > 10) {
+          countSave = 0;
+          await saveSupabaseDB(board);
+          io.emit("_supa", "base");
+        }
+      }
     });
 
     socket.on("cube", (data) => {

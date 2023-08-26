@@ -12,6 +12,7 @@ const MultiCubes = () => {
   const [, setUserName] = useAtom("username");
   const [, setMessages] = useAtom("messages");
   const [connectStatus, setConnectStatus] = useState(false);
+  const [supa, setSupa] = useState(false);
 
   const ws = useRef(null);
 
@@ -79,6 +80,14 @@ const MultiCubes = () => {
       if (data[0] === "_message") {
         setMessages((prev) => [...prev, data[1]]);
       }
+
+      if (data[0] === "_supa") {
+        setSupa(true);
+
+        setTimeout(() => {
+          setSupa(false);
+        }, 1000);
+      }
     });
 
     ws.current = socket;
@@ -124,6 +133,7 @@ const MultiCubes = () => {
         ) : (
           <span>Connecting...</span>
         )}
+        {supa && <span>supa</span>}
       </div>
       {connectStatus && <Shoutbox ws={ws.current} />}
     </div>

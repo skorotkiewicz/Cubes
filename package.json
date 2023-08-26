@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.33.1",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-atomize-store": "^1.0.2",
     "react-dom": "^18.2.0",
