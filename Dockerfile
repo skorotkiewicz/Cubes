@@ -12,4 +12,4 @@ RUN npm run build
 
 ENV PORT=5000
 
-CMD [ "npm","serve" ]
+CMD [ "npm", "run", "serve" ]
