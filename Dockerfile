@@ -10,6 +10,6 @@ COPY . .
 
 RUN npm run build
 
-ENV PORT=5000
+ENV PORT=5173
 
 CMD [ "npm", "run", "serve" ]
