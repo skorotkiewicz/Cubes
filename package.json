@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=development node server",
     "build": "rm -rf dist && npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir /dist/client",
-    "build:server": "vite build --ssr /src/entry-server.jsx --outDir /dist/server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "serve": "NODE_ENV=production node server",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
