@@ -45,7 +45,7 @@ async function createServer() {
   let countSave = 0;
 
   io.on("connection", (socket) => {
-    socket.on("player", async (data) => {
+    socket.on("player", (data) => {
       const initBoard = {};
       const name = username();
       const initMessages = Array.from(messages.values()).slice(-30);
@@ -58,6 +58,15 @@ async function createServer() {
 
       socket.emit("_init", initMessages, name, initBoard);
       io.emit("_count", players.size);
+    });
+
+    socket.on("cube", async (data) => {
+      board.set(data.id, data.color);
+
+      socket.broadcast.emit("_cube", {
+        id: data.id,
+        color: data.color,
+      });
 
       if (board.size > 0 && SUPABASE()) {
         countSave++;
@@ -67,15 +76,6 @@ async function createServer() {
           io.emit("_supa", "base");
         }
       }
-    });
-
-    socket.on("cube", (data) => {
-      board.set(data.id, data.color);
-
-      socket.broadcast.emit("_cube", {
-        id: data.id,
-        color: data.color,
-      });
     });
 
     socket.on("message", (data) => {
