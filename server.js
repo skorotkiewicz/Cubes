@@ -37,6 +37,7 @@ async function createServer() {
       origin: ["http://172.20.10.11:5173", "https://cubes.fly.dev"],
     },
     path: "/api/",
+    transports: ["websocket"],
   });
 
   const players = new Map();
