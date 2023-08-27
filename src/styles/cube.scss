@@ -40,9 +40,6 @@
 
 .boardsize {
   display: flex;
-  // justify-content: center;
-  // align-items: center;
-
   width: 400px;
   margin: 10px 0 10px 0;
   border: 1px solid #444444;
@@ -53,4 +50,10 @@
   input {
     margin-right: 15px;
   }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

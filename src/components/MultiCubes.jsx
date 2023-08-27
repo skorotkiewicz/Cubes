@@ -100,19 +100,19 @@ const MultiCubes = () => {
   }, []);
 
   return (
-    <div>
-      <div
-        className={`cube${grid ? " grid" : " nogrid"}`}
-        style={{
-          width: `${cols * (cubeSize + margin * 2)}px`,
-        }}
-      >
-        {!connectStatus ? (
-          <div>
-            <h1>Loading...</h1>
-          </div>
-        ) : (
-          <>
+    <>
+      {!connectStatus ? (
+        <div className="loading">
+          <h1>Loading...</h1>
+        </div>
+      ) : (
+        <div>
+          <div
+            className={`cube${grid ? " grid" : " nogrid"}`}
+            style={{
+              width: `${cols * (cubeSize + margin * 2)}px`,
+            }}
+          >
             {new Array(rows * cols).fill().map((_, i) => (
               <div
                 key={i}
@@ -126,25 +126,26 @@ const MultiCubes = () => {
                 &nbsp;
               </div>
             ))}
-          </>
-        )}
-      </div>
+          </div>
 
-      <Tools currentColor={currentColor} setCurrentColor={setCurrentColor} />
+          <Tools
+            currentColor={currentColor}
+            setCurrentColor={setCurrentColor}
+          />
 
-      <div className="btn">
-        <button onClick={() => setGrid((prev) => !prev)}>
-          {grid ? "Off Grid" : "On Grid"}
-        </button>
-        {connectStatus ? (
-          <span>Users: {countUsers}</span>
-        ) : (
-          <span>Connecting...</span>
-        )}
-        {supa && <span>Supa...</span>}
-      </div>
-      {connectStatus && <Shoutbox ws={ws.current} />}
-    </div>
+          <div className="btn">
+            <button onClick={() => setGrid((prev) => !prev)}>
+              {grid ? "Off Grid" : "On Grid"}
+            </button>
+            <span>Users: {countUsers}</span>
+
+            {supa && <span>Supa...</span>}
+          </div>
+
+          <Shoutbox ws={ws.current} />
+        </div>
+      )}
+    </>
   );
 };
 

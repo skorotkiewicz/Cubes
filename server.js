@@ -84,7 +84,7 @@ async function createServer() {
     });
 
     socket.on("disconnect", async () => {
-      await saveSupabaseDB(board);
+      SUPABASE() ? await saveSupabaseDB(board) : null;
       io.emit("_supa", "base");
 
       players.delete(socket.id);
