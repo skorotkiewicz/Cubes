@@ -26,7 +26,8 @@ const height = 1024;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
-const imagePath = path.join(__dirname, "public/place.png");
+// const imagePath = path.join(__dirname, "public/place.png");
+const imagePath = "/data/place.png";
 const initialColor = { r: 255, g: 255, b: 255, alpha: 1 };
 let lastChange = new Date();
 

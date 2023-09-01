@@ -6,6 +6,10 @@
 app = "cubes"
 primary_region = "arn"
 
+[mounts]
+  source="place"
+  destination="/data"
+
 [[services]]
   internal_port = 5173
   protocol = "tcp"
