@@ -8,10 +8,6 @@ primary_region = "arn"
 
 [build]
 
-[[mounts]]
-  source = "place"
-  destination = "/data"
-
 [[services]]
   protocol = "tcp"
   internal_port = 5173
@@ -30,3 +26,7 @@ primary_region = "arn"
   [[services.tcp_checks]]
     interval = "10s"
     timeout = "2s"
+
+[[mounts]]
+  source = "place"
+  destination = "/data"

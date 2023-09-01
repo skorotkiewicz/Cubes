@@ -177,7 +177,7 @@ async function main() {
     );
   }
 
-  app.use(express.static("/public"));
+  app.use(express.static("/data"));
   // app.use("/", express.static(path.join(__dirname, "public")));
 
   app.use("*", async (req, res, next) => {
