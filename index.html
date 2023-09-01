@@ -6,8 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cubes</title>
   </head>
-  <body>
+  <body style="overflow: hidden">
     <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/entry-client.jsx"></script>
+    <script>
+      //Used to fix scroll when pressing auxclick
+      document.body.onmousedown = (e) => {
+        if (e.button === 1) {
+          e.preventDefault();
+          return false;
+        }
+      };
+    </script>
   </body>
 </html>

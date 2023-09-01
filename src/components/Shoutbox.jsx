@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
-import { useAtom } from "react-atomize-store";
 
-const Shoutbox = ({ ws }) => {
+const Shoutbox = ({ name, msgs, setMsgs, socket }) => {
   const [open, setOpen] = useState(false);
   const [unread, setUnread] = useState(0);
   const [msg, setMsg] = useState("");
-  const [userName] = useAtom("username");
-  const [messages, setMessages] = useAtom("messages");
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
@@ -17,16 +14,13 @@ const Shoutbox = ({ ws }) => {
     }
 
     if (!open) setUnread((prev) => prev + 1);
-  }, [messages]);
+  }, [msgs]);
 
   const sendMessage = (data) => {
     if (!(data.length >= 1)) return;
 
-    setMessages((prev) => [
-      ...prev,
-      { date: new Date(), name: userName, message: data },
-    ]);
-    ws.emit("message", data);
+    setMsgs((prev) => [...prev, { date: new Date(), name, message: data }]);
+    socket.emit("message", data);
     setMsg("");
   };
 
@@ -64,7 +58,7 @@ const Shoutbox = ({ ws }) => {
             </h3>
 
             <div ref={messagesContainerRef} className="messages">
-              {messages.map((d, i) => (
+              {msgs.map((d, i) => (
                 <div key={i}>
                   <span className="time">{timeParser(new Date(d.date))} |</span>{" "}
                   <span className="name">{d.name}:</span>{" "}

@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
-import "dotenv/config";
 import { createServer as createHttpServer } from "http";
 import { createServer as createViteServer } from "vite";
 import fs from "fs";
 import path from "path";
+import sharp from "sharp";
 import { fileURLToPath } from "url";
+import { RateLimiterMemory } from "rate-limiter-flexible";
 import express from "express";
 import { Server } from "socket.io";
 import {
@@ -13,7 +14,6 @@ import {
   // colors,
   animals,
 } from "unique-names-generator";
-import { initBoardDB, saveSupabaseDB } from "./supabase.js";
 
 const username = () => {
   return uniqueNamesGenerator({
@@ -21,15 +21,68 @@ const username = () => {
   });
 };
 
+const width = 1024;
+const height = 1024;
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
+const imagePath = path.join(__dirname, "public/place.png");
+const initialColor = { r: 255, g: 255, b: 255, alpha: 1 };
+let lastChange = new Date();
 
-async function createServer() {
+async function getInitialArray(width, height) {
+  if (fs.existsSync(imagePath)) {
+    const image = await sharp(imagePath).ensureAlpha().raw().toBuffer();
+    return new Uint8ClampedArray(image);
+  } else {
+    // console.log("Error reading data, creating new blank image");
+    const blankImage = await sharp({
+      create: {
+        width,
+        height,
+        channels: 4,
+        background: initialColor,
+      },
+    })
+      .png()
+      .raw()
+      .toBuffer();
+    return blankImage;
+  }
+}
+
+async function downloadImage(canvasArray) {
+  const image = sharp(canvasArray, {
+    raw: {
+      width,
+      height,
+      channels: 4,
+    },
+  });
+  await image.toFile(imagePath);
+}
+
+async function main() {
+  const canvasArray = await getInitialArray(width, height);
+  await downloadImage(canvasArray);
+
+  setInterval(async () => {
+    const now = new Date();
+    const needsToUpdate = now.getTime() - lastChange.getTime() < 1000;
+
+    if (needsToUpdate) {
+      await downloadImage(canvasArray); // Updating local image
+    }
+  }, 1000);
+
+  const rateLimiter = new RateLimiterMemory({
+    points: 10, // 10 points
+    duration: 1, // per second
+  });
+
   const app = express();
   const server = createHttpServer(app);
   const resolve = (p) => path.resolve(__dirname, p);
-  const SUPABASE = () => process.env.ENABLE_SUPABASE === "true";
-
   let vite;
 
   const io = new Server(server, {
@@ -41,22 +94,16 @@ async function createServer() {
   });
 
   const players = new Map();
-  const board = SUPABASE() ? await initBoardDB() : new Map();
   const messages = new Map();
 
   io.on("connection", (socket) => {
     socket.on("player", (data) => {
-      const initBoard = {};
       const name = username();
       const initMessages = Array.from(messages.values()).slice(-30);
 
       players.set(data.id, { id: data.id, name });
 
-      for (const [key, value] of board) {
-        initBoard[key] = value;
-      }
-
-      socket.emit("_init", initMessages, name, initBoard);
+      socket.emit("_init", initMessages, name);
       io.emit("_count", players.size);
     });
 
@@ -84,10 +131,31 @@ async function createServer() {
       });
     });
 
-    socket.on("disconnect", async () => {
-      SUPABASE() ? await saveSupabaseDB(board) : null;
-      io.emit("_supa", "base");
+    socket.on("pixel", async (pixel) => {
+      // console.log("Recieved pixel: ", pixel);
+      try {
+        await rateLimiter.consume(socket.handshake.headers["x-real-ip"]);
+        const [x, y, r, g, b] = pixel;
+        const index = (width * y + x) * 4;
 
+        const original_r = canvasArray[index];
+        const original_g = canvasArray[index + 1];
+        const original_b = canvasArray[index + 2];
+
+        if (original_r !== r || original_g !== g || original_b !== b) {
+          canvasArray[index] = r;
+          canvasArray[index + 1] = g;
+          canvasArray[index + 2] = b;
+          canvasArray[index + 3] = 255;
+          lastChange = new Date();
+          socket.broadcast.emit("_pixel", pixel);
+        }
+      } catch (rejRes) {
+        socket.disconnect(true);
+      }
+    });
+
+    socket.on("disconnect", async () => {
       players.delete(socket.id);
       io.emit("_count", players.size);
     });
@@ -107,6 +175,9 @@ async function createServer() {
       })
     );
   }
+
+  app.use(express.static("/public"));
+  // app.use("/", express.static(path.join(__dirname, "public")));
 
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -136,4 +207,4 @@ async function createServer() {
   //   app.listen(5173);
 }
 
-createServer();
+main();

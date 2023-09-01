@@ -1,5 +1,5 @@
 {
-  "name": "game",
+  "name": "cubes",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,33 +8,31 @@
     "build": "rm -rf dist && npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
-    "serve": "NODE_ENV=production node server",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "serve": "NODE_ENV=production node server"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.33.1",
-    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "panzoom": "^9.4.3",
+    "rate-limiter-flexible": "^3.0.0",
     "react": "^18.2.0",
-    "react-atomize-store": "^1.0.2",
+    "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.0",
-    "sass": "^1.56.1",
-    "socket.io": "^4.6.2",
-    "socket.io-client": "^4.6.2",
+    "sass": "^1.66.1",
+    "sharp": "^0.32.5",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react": "^4.0.0",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
     "compression": "^1.7.4",
-    "eslint": "^8.38.0",
+    "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "express": "^4.17.1",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "serve-static": "^1.15.0",
-    "vite": "^4.3.9"
+    "vite": "^4.4.5"
   }
 }

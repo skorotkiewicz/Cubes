@@ -1,13 +1,8 @@
 import "./App.scss";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
 
-import { Router } from "./Router";
+import App from "./App.jsx";
 
 export const render = ({ path }) => {
-  return ReactDOMServer.renderToString(
-    <StaticRouter location={path}>
-      <Router />
-    </StaticRouter>
-  );
+  return ReactDOMServer.renderToString(<App />);
 };
