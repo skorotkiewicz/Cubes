@@ -14,7 +14,7 @@ primary_region = "arn"
 
 [[services]]
   protocol = "tcp"
-  internal_port = 3000
+  internal_port = 5173
 
   [[services.ports]]
     port = 80
